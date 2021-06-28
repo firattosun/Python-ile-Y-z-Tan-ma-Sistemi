@@ -1,0 +1,52 @@
+PROJE HAKKINDA
+Bu çalışmada “Yüz Tanıma” adı verilen teknolojik yenilik uygulanmaktadır.Yüz tanıma güvenlik,sosyal,askeri,eğlence gibi alanlarda sıkça kullanılan yeni bir teknolojik gelişmedir.
+Projemizde Raspberry Pi Zero Wireless modeli kartı kullanarak karta bağlanan kamera modülü yardımıyla; OpenCV,Numpy kütüphanelerinden yararlanarak daha önceden 
+tanıtılmış yüzlerden biriyle yeni yüzün doğru eşleştirilmesi temeline dayandırılmaktadır.Yaptığımız projeye daha güçlü donanım parçaları eklenerek ve makine öğrenmesi,derin öğrenme 
+gibi yeni teknikler kullanılarak daha yüksek çapta projeler elde edilmeye açıktır.
+
+NUMPY KÜTÜPHANESİ 
+NumPy, Python’ da bilimsel hesaplamalarda kullanılan bir python kütüphanesidir. NumPy genel olarak dizi/vektör/matris hesaplamaları için özelleşmiş bir kütüphane olup,
+büyük çaptaki veri kümeleri üzerinden işlem yapmayı kolaylaştırır.Genelde matematiksel işlemler yapılır ve tipik olarak bu tür operasyonlar, Python’un dahili dizilerini kullanarak
+mümkün olana oranla daha verimli ve daha az kodla yürütülür. NumPy kullanılarak istatistik işlemleri ve simülasyonlarda yapılabilir.
+NumPy paketinin temelinde, ndarray nesnesi vardır. Bu, homojen veri türlerinin n-boyutlu dizilerini kapsar, birçok işlem performans için derlenmiş kodda gerçekleştirilir
+
+OPENCV KÜTÜPHANESİ 
+OpenCV, gerçek zamanlı uygulamaların yapımında kullanılan görüntü-görme temelli açık kodlu bir kütüphane olarak karşımıza çıkmaktadır.Var olan algoritmaların üzerinden 
+değişiklikler  yapılarak kodlarıN kullanmasını kolay hale getirmektedir. 
+
+
+ EİGENFACES ALGORİTMASI 
+ Otomatik yüz tanıma üzerinde yapılan önceki çalışmaların birçoğu, yüz uyarıcısının hangi yönlerinin, yüz tanıma için önemli olduğu konusunu ihmal etmiştir. 
+ Buna göre, önemli lokal ve global özellikleri vurgulayan yüz görüntülerinin kodlanması ve Şifrelerinin çözülmesi için, bir bilgi teorisi yaklaşımının kullanımı önerilir. 
+ Bilgi teorisi dilinde, bir yüz görüntüsünün ilgili bilgisi çıkarılır, mümkün olduğunca verimli bir şekilde kodlanır ve sonra benzer şekilde kodlanan bir model, veri tabanı ile 
+ karşılaştırılır .Matematiksel açıdan, yüzlerin dağıtımının ana bileşenleri veya yüz görüntüleri setinin kovaryans matrisinin öz vektörleri, çok yüksek boyutlu bir uzayda 
+ görüntüyü nokta (veya vektör) olarak ele alacak şekilde aranır. 
+ 
+ FİSHERFACES ALGORİTMASI 
+ Fisher yüz algoritması (Fisherface approach), sınıflandırma tabanlı tanımlama için kullanılan diğer bir yöntemdir. Yüz, parmak izi gibi iki boyutlu görüntüleri 
+ tanımlamada kullanılmak üzere, DDA‘nın iki boyutlu verilere uyarlanması sonucunda oluşturulmuştur. Aynı kişiye ait birden fazla, farklı görüntünün veri tabanına tanıtılarak 
+ sınıf içi dağılımın en aza, sınıflar arası dağılımın ise en fazlaya ulaşabilmesi için geliştirilmiştir. Bu sayede, Fisher yaklaşımında tanımlama başarım oranında artış 
+ gözlenmektedir.
+ 
+ LBPH ALGORİTMASI 
+ Bu  operatör  görüntünün  3×3  pencerelerin  ortasındaki  piksel  değeri eşik  seviyesi  olarak  seçilerek  birbirlerine  göre  karşılaştırılması  sonucu  ikili  değerlerin 
+ atanması temeline dayanmaktadır. Oluşturulan ikili sayı dizisine LBP kodu denir ve bu kod ile görüntüdeki farklı tipteki özellikleri belirlemek mümkün hale gelir. 
+ Örneğin, kenarlar, köşeler,  aydınlık  veya  karanlık  bölgeler,  çizgi  bölgeleri  gibi.Fakat  3×3’lük  operatörler baskın  özellikleri  yakalayabilmek  için  etkin  olmayabilir.
+ Dolayısıyla  probleme  göre operatörün uzunluğu belirlenmeli veya adaptif olarak atanmalıdır. Bunun yerine dairesel olarak da LBP tanımlamaları yapılmaktadır. 
+ Burada tanımlanması gerekenikiparametre bulunmaktadır.  Bunlar  örnek  nokta  sayısı  P  ve  simetrik  dairesel  komşuluğun  yarıçapı ölçüsü R olarak belirlenir.
+ 
+ HAARCASCADE
+ Haar-Cascade Alfred Haar tarafından tespit edilmiş bir sistemdir.Görüntünün üstündeki nesneyi bulabilmeye yarayan bir yöntemdir.Bu yönteme Haar-Like özellikleri denilmektedir. 
+Haar-Like özelliklerinden bazıları şunlardır;
+a.)Kenar Özelliği
+ Görüntünün üzerindeki belirli bir alan koyu ve belirli bir alan açık renklerden oluşuyor ise bu durum kenar özelliği olduğunu belirtmektedir.
+ b.)Çizgi Özelliği
+ Görüntünün üstündeki nesne sırasıyla açık, kapalı, açık  renklerden oluşuyor ise bu durumda çizgi özelliği vardır.
+ c.)Dört Kare Özelliği
+ Kare şeklindeki açık ve koyu tonlar çapraz bir şekilde bulunuyor ise dört kare özelliği bulunmaktadır.
+Bu özellikleri kullanarak görüntü üstünde kenar, çizgi, yüz, göz, burun, ev vb birçok nesneyi tespit edebiliriz.Aşağıdaki insan yüzü görseline Haar-Cascade metodu uygulanmıştır.
+Haar-Cascade metodu önceden defalarca eğitilerek yüzün nasıl bir yapıda olduğunu tanımaktadır. Bir canlıyı tanıma veya tanıma işlemi yaparken önceden canlıyı 
+birçok kez tanıtarak nasıl bir yapıda olduğunu eğitiyoruz. Mesela yüz arayan bir sistem ilk olarak iki gözü aramaktadır. Gözü bulduktan sonra burunun varlığını kontrol eder. 
+Burun da varsa kaşın varlığını kontrol ederek istenen sonuçları verir.
+
+
