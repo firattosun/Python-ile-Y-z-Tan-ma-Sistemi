@@ -1,0 +1,59 @@
+UYGULAMANIN GERÇEKLEŞTİRİMİ 
+
+6.1.1. Raspberry Pi Zero Wireless
+	Uygulamamızı Raspberry Pi Zero W modeli anakart üzerinde oluşturduk.Raspberry Pi, fiyat bakımından en uygun bilgisayar olmakla beraber , yalnızca kodlama yapmakta 
+  kullanıldığı söylenemez.Üzerinde birden  fazla I/O pinleri bulunmaktadır.Sıradan bir dizüstü veya masaüstü bilgisayarın yaptığı işlemleri yapabilmekteyiz.
+  Uygulamamızda üzerindeki pinlerin hepsini kullanmaktayız.
+	Son aşamada kurulumun tamamlanması için güç kaynağı bağlantısını yapmak gerekir.Kart üzerindeki MicroUsb girişli power portundan 5V’lik bir gerilim vererek Raspberry Pi 
+  çalışır hale getirilir.
+6.1.2. Gerekli İşletim Sisteminin Kurulması
+	Raspberry Pi’ler kendilerine özel , Debian tabanlı Raspbian işletim sistemini kullanırlar.Bu işletim sistemi , kullanılan Pi’ler için gayet hızlı ve güvenilir yapıdadırlar.
+  İşletim sistemini kurmak üzere sitesinden gerekli dosyalar temin edilir.Temin edilen dosyalar , Sd kart’a kurularak donanıma takılır.
+	Son aşamada kurulumun tamamlanması için güç kaynağı bağlantısını yapmak gerekir.Kart üzerindeki MicroUsb girişli power portundan 5V’lik bir gerilim vererek Raspberry Pi 
+  çalışır hale getirilir
+6.1.3. Pi Zero Uyumlu Kamera Modülünün Takılması
+	Uygulamamızda kullanmak üzere , Raspberry Pi Zero uyumlu kamera temin edilir.Raspberry Pi uyumlu kameralar , Pi’ye enerji vermeden gerekli portuna takılmalıdır.
+  Burada 5 MP çözünürlüğe sahip kamera kullanılmaktadır.Raspberry Pi üzerinde bulunan CSI konnektörüne takılarak hazır hale getirilir.
+
+
+6.1.4 Gerekli  Kütüphanelerinin Kurulması
+	OpenCV  , Open Source Computer Vision Library  kısaca OpenCV Linux,Windows,MAC OS X işletim sistemlerinde çalışan ve çoğu fonksiyonu platform bağımsız open source bir 
+  kütüphanedir.Yüz tanıma ,işaret dili tanıma,hareket yakalama gibi görüntü işleme algoritmalarında sıklıkla kullanılar.Uygulamamızda OpenCV kütüphanesine ek olarak 
+  Numpy kütüphanesini de kullandık.Numpy , bilimsel hesaplamaları hızlı bir şekilde yapmamızı sağlayan bir matematik kütüphanesidir.2 temel kütüphane de Raspbian a
+  rayüzündeki Linux komut satırından yüklenir.Kodlama aşamasında  kod içinde import edilerek 2 kütüphane de kullanıma açık hale getirilir.
+
+6.2. Projenin Uygulanması 
+
+	Raspberry Pi kartının üzerinde çalışacak Yüz Tanıma uygulamasının veri seti oluşturma,eğitme,karşılaştırma adımlarının ve bunların ne gibi yöntemlerden oluştuğundan aşağıda 
+  sırasıyla bahsedilecektir.
+
+6.2.1. Veri Seti Oluşturma
+
+	Uygulamanın tanıması istenen yüzlerin verildiği kısımdır.Veri seti oluşturulurken donanımın gücü,kameranın netliği gibi kriterler göz önüne alınarak oluşturulur.
+  Yüz tanıma uygulamalarında veri seti ne kadar fazlaysa programın doğruluk oranı o kadar yüksek olacaktır.İstenen kişilerin 30 adet gri resmi alınarak bir dizine 
+  kaydedilmiştir.Veri seti oluşturarak programa istenen kişinin yüz özelliklerinin öğretilmesi amaçlanır. 
+
+
+6.2.2. Eğitme
+       
+Veri seti oluşturulduktan sonra OpenCV’nin Local Binary Patterns Histograms (LBPH) yötemini kullandık. LBPH eğitim setindeki her yüzü ayrı ve bağımsız olarak analiz eder.
+Ardından fotoğraflar griye çevrilir.Çünkü algoritmalar fotoğrafların griye çevrilmiş halinde daha verimli ve hızlı çalışır. Yüzdeki belirli noktalar sayısal numaralandırılarak
+bir değer alır.Bunun için haarcascade algoritmasının; haarcascade_frontalface_alt.xml sınıfını biz projemizde kullandık.Böylece elimizdeki veri setleri sisteme eğitilir.
+ Eğitim yapılması,veri setlerinin bir sonraki adımda karşılaştırılabilir hale getirilmesi,kaydedilen yüz değerlerinin tanıma aşamasında kullanılması içindir.
+ 
+
+6.2.3. Karşılaştırma
+
+Veri setlerinin oluşturulması ve sistemin eğitilmesi aşamasından sonra son aşama karşılaştırma aşamasıdır. Bu aşamada, daha önceden oluşturduğumuz 
+verisetleri adlı dosyada bulunan 190*190 ebatındaki, jpg formatındaki veri setlerinin sisteme eğitilmiş hallerinin, gelen girdi yüz değerleriyle karşılaştırılarak
+yüz karşılaştırılması yapılan bireyin doğru tanınması elde edilir.Gelen girdi yüz veri setindeki dosyalardaki resimleri tek tek analiz eder.Bizim projemiz için 
+gelen girdi resim Fırat kişisine aitse veri seti dosyamızdaki sıraya göre ilk otuz resim 1 numaralı İD e ait Fırat kişisine aittir onda eşleşme sağlanabilir.ve gelen girdi 
+resimin altında beyaz bir renkle “Fırat” yazısı belirir.Daha sonra ikinci otuz resim 2 numaralı İD e ait Ayşe kişisine aittir,onda eşleşme sağlanamaz .
+Böylece projemiz amacına ulaşmış olur.
+
+
+
+
+
+
+
